@@ -2,65 +2,172 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Meu Site</title>
-
-  <!-- Importa Montserrat do Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
-
+  <title>gug4</title>
   <style>
-    html, body {
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    :root {
+      --bg-color: #f4f6f5;
+      --text-color: black;
+      --cursor-color: black;
+    }
+
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: #f4f6f5;
+      height: 100vh;
+      background-color: var(--bg-color);
       font-family: 'Montserrat', sans-serif;
-      color: black;
-      position: relative; /* para imagem absoluta */
-      overflow: hidden;
-    }
-
-    .imagem-clip {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 300px;
-      height: auto;
-      transform: scaleX(-1);
-      clip-path: inset(20px 30px 20px 30px);
-      margin: 10px;
-      z-index: 10;
-    }
-
-    /* Container para o título, centralizado */
-    .titulo-container {
-      height: 100vh; /* altura total da viewport */
+      cursor: none;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
+      color: var(--text-color);
+      user-select: none;
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    .titulo {
-      font-size: 6rem;
+    h1 {
       font-weight: 700;
-      /* desloca um pouco para cima */
-      transform: translateY(-15vh);
+      font-size: 6rem;
       margin: 0;
-      z-index: 5;
+      cursor: none; /* mantém cursor personalizado */
+    }
+
+    .links {
+      margin-top: 20px;
+      display: flex;
+      gap: 30px;
+    }
+
+    .links a {
+      font-weight: 400;
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: var(--text-color);
+      cursor: none;
+      transition: color 0.3s ease;
+    }
+
+    .links a:hover {
+      opacity: 0.7;
+    }
+
+    #cursor {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--cursor-color);
+      border-radius: 50%;
+      background: transparent;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: transform 0.1s ease, border-color 0.1s;
+    }
+
+    #cursor.shrink {
+      transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    #theme-toggle:hover {
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
 
-  <img
-    src="images/470176b4cc054f98dec3d34457a6a4fd.jpg"
-    alt="test"
-    class="imagem-clip"
-  />
+  <h1>gug4</h1>
 
-  <div class="titulo-container">
-    <h1 class="titulo">gug4</h1>
+  <div class="links">
+    <a href="https://www.x.com/gugagenio" target="_blank">twitter</a>
+    <a href="https://osu.ppy.sh/u/9462202" target="_blank">osu!</a>
+    <a href="https://www.konect.gg/guga" target="_blank">konect</a>
   </div>
+
+  <button id="theme-toggle">🌙</button>
+
+  <div id="cursor"></div>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const title = document.querySelector('h1');
+
+    let darkMode = false;
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mousedown', () => {
+      cursor.classList.add('shrink');
+    });
+
+    document.addEventListener('mouseup', () => {
+      cursor.classList.remove('shrink');
+    });
+
+    themeToggle.addEventListener('click', () => {
+      darkMode = !darkMode;
+
+      if (darkMode) {
+        root.style.setProperty('--bg-color', '#000');
+        root.style.setProperty('--text-color', '#fff');
+        root.style.setProperty('--cursor-color', '#fff');
+        themeToggle.textContent = '☀️';
+      } else {
+        root.style.setProperty('--bg-color', '#f4f6f5');
+        root.style.setProperty('--text-color', '#000');
+        root.style.setProperty('--cursor-color', '#000');
+        themeToggle.textContent = '🌙';
+      }
+    });
+
+    function invertCursorColor() {
+      const currentCursorColor = getComputedStyle(root).getPropertyValue('--cursor-color').trim().toLowerCase();
+      const invertedColor = (currentCursorColor === 'black' || currentCursorColor === '#000000' || currentCursorColor === 'rgb(0, 0, 0)') ? 'white' : 'black';
+      root.style.setProperty('--cursor-color', invertedColor);
+    }
+
+    function resetCursorColor() {
+      if (darkMode) {
+        root.style.setProperty('--cursor-color', 'white');
+      } else {
+        root.style.setProperty('--cursor-color', 'black');
+      }
+    }
+
+    // Cursor color invert on theme toggle hover
+    themeToggle.addEventListener('mouseenter', invertCursorColor);
+    themeToggle.addEventListener('mouseleave', resetCursorColor);
+
+    // Cursor color invert on title hover
+    title.addEventListener('mouseenter', invertCursorColor);
+    title.addEventListener('mouseleave', resetCursorColor);
+  </script>
 
 </body>
 </html>
