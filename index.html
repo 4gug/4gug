@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Meu Site</title>
   <style>
     body {
-      background-color: white;
+      background-color: #f4f6f5; /* cor de fundo */
       color: black;
       font-family: sans-serif;
+      padding: 20px;
     }
 
-    .imagem-editada {
+    .imagem-clip {
+      width: 300px;
+      height: auto;
       transform: scaleX(-1); /* espelha horizontalmente */
-      width: 200px; /* ou o valor que preferir */
-      height: 200px;
-      object-fit: cover;     /* corta para preencher o tamanho */
-      object-position: center; /* centraliza o corte */
-      border: none;
+      clip-path: inset(30px 30px 30px 30px); /* top right bottom left */
+      display: block;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   Hello, world
 
-  <img src="images/470176b4cc054f98dec3d34457a6a4fd.jpg" alt="test" class="imagem-editada">
+  <img
+    src="images/470176b4cc054f98dec3d34457a6a4fd.jpg"
+    alt="test"
+    class="imagem-clip"
+  />
 </body>
 </html>
