@@ -9,11 +9,20 @@
       color: black;
       font-family: sans-serif;
     }
+
+    .imagem-editada {
+      transform: scaleX(-1); /* espelha horizontalmente */
+      width: 200px; /* ou o valor que preferir */
+      height: 200px;
+      object-fit: cover;     /* corta para preencher o tamanho */
+      object-position: center; /* centraliza o corte */
+      border: none;
+    }
   </style>
 </head>
 <body>
   Hello, world
 
-  <img src="images/470176b4cc054f98dec3d34457a6a4fd.jpg" alt="test" width="300">
+  <img src="images/470176b4cc054f98dec3d34457a6a4fd.jpg" alt="test" class="imagem-editada">
 </body>
 </html>
