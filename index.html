@@ -3,31 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <title>Meu Site</title>
+
+  <!-- Importa Montserrat do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+
   <style>
-    body {
-      background-color: #f4f6f5; /* cor de fundo */
+    body, html {
+      margin: 0;
+      height: 100%;
+      background-color: #f4f6f5;
+      font-family: 'Montserrat', sans-serif;
       color: black;
-      font-family: sans-serif;
-      padding: 20px;
+      display: flex;
+      align-items: center; /* centraliza verticalmente */
+      justify-content: center; /* centraliza horizontalmente */
+      position: relative;
+      overflow: hidden;
+      height: 100vh;
     }
 
+    /* Imagem no canto superior esquerdo */
     .imagem-clip {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 300px;
       height: auto;
-      transform: scaleX(-1); /* espelha horizontalmente */
-      clip-path: inset(30px 30px 30px 30px); /* top right bottom left */
-      display: block;
-      margin-top: 20px;
+      transform: scaleX(-1);
+      clip-path: inset(20px 30px 20px 30px);
+      margin: 10px;
+    }
+
+    /* Container para o título para ajustar o posicionamento vertical */
+    .titulo {
+      font-size: 6rem; /* título grande */
+      position: relative;
+      top: -15vh; /* sobe o título um pouco acima do meio */
+      font-weight: 700;
     }
   </style>
 </head>
 <body>
-  Hello, world
 
   <img
     src="images/470176b4cc054f98dec3d34457a6a4fd.jpg"
     alt="test"
     class="imagem-clip"
   />
+
+  <h1 class="titulo">gug4</h1>
+
 </body>
 </html>
