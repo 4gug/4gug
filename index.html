@@ -8,21 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
 
   <style>
-    body, html {
+    html, body {
       margin: 0;
+      padding: 0;
       height: 100%;
       background-color: #f4f6f5;
       font-family: 'Montserrat', sans-serif;
       color: black;
-      display: flex;
-      align-items: center; /* centraliza verticalmente */
-      justify-content: center; /* centraliza horizontalmente */
-      position: relative;
+      position: relative; /* para imagem absoluta */
       overflow: hidden;
-      height: 100vh;
     }
 
-    /* Imagem no canto superior esquerdo */
     .imagem-clip {
       position: absolute;
       top: 0;
@@ -32,14 +28,25 @@
       transform: scaleX(-1);
       clip-path: inset(20px 30px 20px 30px);
       margin: 10px;
+      z-index: 10;
     }
 
-    /* Container para o título para ajustar o posicionamento vertical */
-    .titulo {
-      font-size: 6rem; /* título grande */
+    /* Container para o título, centralizado */
+    .titulo-container {
+      height: 100vh; /* altura total da viewport */
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
-      top: -15vh; /* sobe o título um pouco acima do meio */
+    }
+
+    .titulo {
+      font-size: 6rem;
       font-weight: 700;
+      /* desloca um pouco para cima */
+      transform: translateY(-15vh);
+      margin: 0;
+      z-index: 5;
     }
   </style>
 </head>
@@ -51,7 +58,9 @@
     class="imagem-clip"
   />
 
-  <h1 class="titulo">gug4</h1>
+  <div class="titulo-container">
+    <h1 class="titulo">gug4</h1>
+  </div>
 
 </body>
 </html>
